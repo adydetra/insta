@@ -1,0 +1,3 @@
+<template>
+  <Grid/>
+</template>
