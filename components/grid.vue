@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-full flex items-center justify-between px-4">
+  <nav class="w-full flex items-center justify-between px-4 text-">
     <h1 class="text-4xl font-semibold">insta</h1>
     <ul class="flex gap-8 text-gray-400">
       <li v-for="button in buttons" :key="button.title">
@@ -7,6 +7,7 @@
           <Icon class="w-5 h-5 md:w-6 md:h-6" :name="button.icon" :title="button.title" />
         </button>
       </li>
+      <Color />
     </ul>
   </nav>
 
@@ -17,7 +18,7 @@
       class="relative overflow-hidden flex items-center justify-center cursor-pointer aspect-square bg-black"
       @click="openFilePicker(index)"
     >
-      <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="setPhoto(index, $event)" :ref="'inputRef' + index" aria-label="input"/>
+      <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="setPhoto(index, $event)" :ref="'inputRef' + index" aria-label="input" />
       <NuxtImg v-if="photo !== null" :src="photo" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
       <NuxtImg v-else :src="defaultPhoto" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
     </div>

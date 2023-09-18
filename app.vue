@@ -4,6 +4,12 @@
   </NuxtLayout>
 </template>
 
+<style>
+body * {
+  @apply transition-colors ease-in-out duration-500;
+}
+</style>
+
 <script lang="ts" setup>
 useSeoMeta({
   title: "insta",

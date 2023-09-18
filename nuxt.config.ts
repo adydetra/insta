@@ -12,9 +12,9 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/color-mode",
     "@nuxt/image",
     "nuxt-icon",
-    // "@pinia/nuxt"
   ],
 
   devtools: { enabled: false },
@@ -35,5 +35,10 @@ export default defineNuxtConfig({
     display: "swap",
     prefetch: true,
     preconnect: true,
+  },
+
+  colorMode: {
+    classSuffix: "",
+    preference: "dark",
   },
 });

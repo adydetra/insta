@@ -11,7 +11,7 @@ Free photo post planner.
 ## Checklist
 
 - [x] Batch importing
-- [ ] Dark mode
+- [x] Dark mode
 - [ ] PWA
 
 ## Preview
