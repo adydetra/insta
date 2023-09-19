@@ -1,10 +1,10 @@
 <template>
   <nav class="w-full flex items-center justify-between px-4 text-">
     <h1 class="text-4xl font-semibold">insta</h1>
-    <ul class="flex gap-8 text-gray-400">
+    <ul class="flex gap-6 md:gap-8 text-gray-400">
       <li v-for="button in buttons" :key="button.title">
         <button @click="button.action" aria-label="button">
-          <Icon class="w-5 h-5 md:w-6 md:h-6" :name="button.icon" :title="button.title" />
+          <Icon class="w-4 h-4 md:w-5 md:h-5 mt-2" :name="button.icon" :title="button.title" />
         </button>
       </li>
       <Color />
@@ -35,16 +35,26 @@ export default {
       currentObjectFit: "object-cover",
       gridGap: "gap-1",
       defaultPhoto: "/example.png",
+      maxPhotos: 9,
     };
   },
   mounted() {
     const savedPhotos = JSON.parse(localStorage.getItem("savedPhotos")) || [];
 
-    this.photos = savedPhotos.length === 0 ? new Array(9).fill(null) : savedPhotos;
+    if (savedPhotos.length < this.maxPhotos) {
+      this.photos = savedPhotos.concat(new Array(this.maxPhotos - savedPhotos.length).fill(null));
+    } else {
+      this.photos = savedPhotos;
+    }
   },
   computed: {
     buttons() {
       return [
+        {
+          title: "New Card",
+          icon: "line-md:plus-square",
+          action: this.addNewCard,
+        },
         {
           title: "Undo",
           icon: "line-md:arrow-left-square",
@@ -62,7 +72,7 @@ export default {
         },
         {
           title: "Reset",
-          icon: "line-md:rotate-270",
+          icon: "line-md:close-circle",
           action: this.reset,
         },
       ];
@@ -72,6 +82,7 @@ export default {
     openFilePicker(index) {
       this.$refs["inputRef" + index].click();
     },
+
     setPhoto(index, event) {
       const file = event.target.files[0];
       if (file) {
@@ -84,13 +95,29 @@ export default {
 
         const reader = new FileReader();
         reader.onload = () => {
-          this.photoHistory.push([...this.photos]);
-          this.photos[index] = reader.result;
+          const newPhotos = [...this.photos];
+          newPhotos[index] = reader.result;
+
+          this.photoHistory.push({
+            index: index,
+            photo: reader.result,
+          });
+
+          this.photos = newPhotos;
           localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
         };
         reader.readAsDataURL(file);
       }
     },
+
+    undo() {
+      if (this.photoHistory.length > 0) {
+        const lastChange = this.photoHistory.pop();
+        this.photos[lastChange.index] = null;
+        localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+      }
+    },
+
     toggleGap() {
       if (this.gridGap === "gap-1") {
         this.gridGap = "gap-2";
@@ -103,6 +130,7 @@ export default {
         this.currentGap = 1;
       }
     },
+
     toggleObjectFit() {
       if (this.currentObjectFit === "object-cover") {
         this.currentObjectFit = "object-contain";
@@ -110,15 +138,16 @@ export default {
         this.currentObjectFit = "object-cover";
       }
     },
-    undo() {
-      if (this.photoHistory.length > 0) {
-        this.photos = this.photoHistory.pop();
-        localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-      }
-    },
+
     reset() {
       this.photos = new Array(9).fill(null);
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+    },
+
+    addNewCard() {
+      this.photos.push(null);
+      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+      console.log("Card baru ditambahkan.");
     },
   },
 };
