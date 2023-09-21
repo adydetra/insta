@@ -5,6 +5,10 @@
 </template>
 
 <style>
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: #444 #222;
+}
 body * {
   @apply transition-colors ease-in-out duration-500;
 }
