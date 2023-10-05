@@ -12,11 +12,11 @@
     "@nuxt/devtools": "^0.8.5",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/tailwindcss": "^6.8.0",
-    "nuxt": "^3.7.3",
+    "nuxt": "^3.7.4",
     "nuxt-icon": "^0.5.0"
   },
   "dependencies": {
-    "@nuxt/image": "^1.0.0-rc.1",
+    "@nuxt/image": "1.0.0-rc.3",
     "@nuxtjs/color-mode": "^3.3.0",
     "@pinia/nuxt": "^0.4.11",
     "pinia": "^2.1.6"
