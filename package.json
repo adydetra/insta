@@ -19,6 +19,6 @@
     "@nuxt/image": "1.0.0-rc.3",
     "@nuxtjs/color-mode": "^3.3.0",
     "@pinia/nuxt": "^0.4.11",
-    "pinia": "^2.1.6"
+    "pinia": "^2.1.7"
   }
 }
