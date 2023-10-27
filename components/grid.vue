@@ -3,7 +3,7 @@
     <h1 class="text-4xl font-semibold">insta</h1>
     <ul class="flex gap-6 md:gap-8 lg:gap-6 2xl:gap-8 text-gray-400">
       <li v-for="button in buttons" :key="button.title">
-        <button @click="button.action" aria-label="button">
+        <button @click="button.action" aria-label="button" :title="button.title">
           <Icon class="w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2" :name="button.icon" :title="button.title" />
         </button>
       </li>
@@ -51,12 +51,12 @@ export default {
     buttons() {
       return [
         {
-          title: "New Card",
+          title: "New box",
           icon: "line-md:plus-square",
           action: this.addNewCard,
         },
         {
-          title: "Undo",
+          title: "Undo (Img Only)",
           icon: "line-md:arrow-left-square",
           action: this.undo,
         },
