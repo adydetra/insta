@@ -6,7 +6,7 @@ Insta is a web application specifically designed to give you an overview before 
 
 Free photo post planner.
 
-**[Try the App now!](https://insta-planner.vercel.app)**
+**[Try the App now!](https://insta.adydetra.my.id/)**
 
 ## Checklist
 
