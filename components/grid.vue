@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       photos: [],
-      photoHistory: [],
+      changeHistory: [],
       currentGap: 1,
       currentObjectFit: "object-cover",
       gridGap: "gap-1",
@@ -59,7 +59,7 @@ export default {
           action: this.addNewCard,
         },
         {
-          title: "Undo (Img Only)",
+          title: "Undo",
           icon: "line-md:arrow-left-square",
           action: this.undo,
         },
@@ -101,9 +101,10 @@ export default {
           const newPhotos = [...this.photos];
           newPhotos[index] = reader.result;
 
-          this.photoHistory.push({
+          this.changeHistory.push({
+            type: "image",
             index: index,
-            photo: reader.result,
+            data: reader.result,
           });
 
           this.photos = newPhotos;
@@ -113,10 +114,24 @@ export default {
       }
     },
 
+    addNewCard() {
+      this.photos.push(null);
+      this.changeHistory.push({
+        type: "box",
+        index: this.photos.length - 1,
+      });
+      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+      console.log("Card baru ditambahkan.");
+    },
+
     undo() {
-      if (this.photoHistory.length > 0) {
-        const lastChange = this.photoHistory.pop();
-        this.photos[lastChange.index] = null;
+      if (this.changeHistory.length > 0) {
+        const lastChange = this.changeHistory.pop();
+        if (lastChange.type === "image") {
+          this.photos[lastChange.index] = null;
+        } else if (lastChange.type === "box") {
+          this.photos.splice(lastChange.index, 1);
+        }
         localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
       }
     },
@@ -140,12 +155,6 @@ export default {
       } else {
         this.currentObjectFit = "object-cover";
       }
-    },
-
-    addNewCard() {
-      this.photos.push(null);
-      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-      console.log("Card baru ditambahkan.");
     },
 
     reset() {
