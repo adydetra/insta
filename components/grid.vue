@@ -23,6 +23,8 @@
       <NuxtImg v-else :src="defaultPhoto" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
     </div>
   </section>
+
+  <Modal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
 </template>
 
 <script>
@@ -36,6 +38,7 @@ export default {
       gridGap: "gap-1",
       defaultPhoto: "/example.png",
       maxPhotos: 9,
+      showConfirmModal: false,
     };
   },
   mounted() {
@@ -139,15 +142,24 @@ export default {
       }
     },
 
-    reset() {
-      this.photos = new Array(9).fill(null);
-      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-    },
-
     addNewCard() {
       this.photos.push(null);
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
       console.log("Card baru ditambahkan.");
+    },
+
+    reset() {
+      this.showConfirmModal = true;
+    },
+
+    handleReset() {
+      this.showConfirmModal = false;
+      this.photos = new Array(9).fill(null);
+      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+    },
+
+    cancelReset() {
+      this.showConfirmModal = false;
     },
   },
 };
