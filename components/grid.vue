@@ -56,7 +56,7 @@ export default {
         {
           title: "New box",
           icon: "line-md:plus-square",
-          action: this.addNewCard,
+          action: this.addNewBox,
         },
         {
           title: "Undo",
@@ -114,14 +114,14 @@ export default {
       }
     },
 
-    addNewCard() {
+    addNewBox() {
       this.photos.push(null);
       this.changeHistory.push({
         type: "box",
         index: this.photos.length - 1,
       });
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-      console.log("Card baru ditambahkan.");
+      console.log("Box baru ditambahkan.");
     },
 
     undo() {
