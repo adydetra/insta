@@ -43,12 +43,15 @@ export default {
   },
   mounted() {
     const savedPhotos = JSON.parse(localStorage.getItem("savedPhotos")) || [];
+    const savedChangeHistory = JSON.parse(localStorage.getItem("changeHistory")) || [];
 
     if (savedPhotos.length < this.maxPhotos) {
       this.photos = savedPhotos.concat(new Array(this.maxPhotos - savedPhotos.length).fill(null));
     } else {
       this.photos = savedPhotos;
     }
+
+    this.changeHistory = savedChangeHistory;
   },
   computed: {
     buttons() {
@@ -109,6 +112,7 @@ export default {
 
           this.photos = newPhotos;
           localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+          localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
         };
         reader.readAsDataURL(file);
       }
@@ -121,6 +125,7 @@ export default {
         index: this.photos.length - 1,
       });
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+      localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
       console.log("Box baru ditambahkan.");
     },
 
@@ -133,6 +138,7 @@ export default {
           this.photos.splice(lastChange.index, 1);
         }
         localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+        localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
       }
     },
 
@@ -164,7 +170,9 @@ export default {
     handleReset() {
       this.showConfirmModal = false;
       this.photos = new Array(9).fill(null);
+      this.changeHistory = [];
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
+      localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
     },
 
     cancelReset() {
