@@ -1,14 +1,30 @@
 <template>
-  <nav class="w-full flex items-center justify-between px-4 text-">
+  <nav class="w-full flex items-center justify-between px-4">
     <h1 class="text-4xl font-semibold">insta</h1>
-    <ul class="flex gap-6 md:gap-8 lg:gap-6 2xl:gap-8 text-gray-400">
-      <li v-for="button in buttons" :key="button.title">
-        <button @click="button.action" aria-label="button" :title="button.title">
-          <Icon class="w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2" :name="button.icon" :title="button.title" />
-        </button>
-      </li>
+    <div class="flex gap-6 md:gap-8 lg:gap-6 2xl:gap-8 text-gray-400">
+      <button
+        @click="undo"
+        aria-label="button"
+        :title="undoButtonTitle"
+        :disabled="isUndoDisabled"
+        :class="isUndoDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
+      >
+        <Icon id="icon" :name="undoButtonIcon" :title="undoButtonTitle" />
+      </button>
+      <button v-for="button in buttons" @click="button.action" aria-label="button" :title="button.title" class="hover:opacity-80">
+        <Icon id="icon" :name="button.icon" :title="button.title" />
+      </button>
+      <button
+        @click="reset"
+        aria-label="button"
+        :title="resetButtonTitle"
+        :disabled="isResetDisabled"
+        :class="isResetDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
+      >
+        <Icon id="icon" :name="resetButtonIcon" :title="resetButtonTitle" />
+      </button>
       <Color />
-    </ul>
+    </div>
   </nav>
 
   <section class="grid grid-cols-3 py-12" :class="[gridGap]">
@@ -26,6 +42,12 @@
 
   <Modal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
 </template>
+
+<style>
+#icon {
+  @apply w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2;
+}
+</style>
 
 <script>
 export default {
@@ -50,21 +72,45 @@ export default {
     } else {
       this.photos = savedPhotos;
     }
-
     this.changeHistory = savedChangeHistory;
+    this.updateUndoButtonDisabled();
+    this.updateResetButtonDisabled();
   },
   computed: {
+    hasContent() {
+      return this.photos.some((photo) => photo !== null);
+    },
+
+    resetButtonIcon() {
+      return this.hasContent ? "line-md:close-circle" : "line-md:close-circle";
+    },
+
+    resetButtonTitle() {
+      return this.hasContent ? "Reset" : "Reset is disabled";
+    },
+
+    isResetDisabled() {
+      return this.changeHistory.length === 0;
+    },
+
+    undoButtonIcon() {
+      return this.changeHistory.length > 0 ? "line-md:arrow-left-square" : "line-md:arrow-left-square";
+    },
+
+    undoButtonTitle() {
+      return this.changeHistory.length > 0 ? "Undo" : "Undo is disabled";
+    },
+
+    isUndoDisabled() {
+      return this.changeHistory.length === 0;
+    },
+
     buttons() {
       return [
         {
           title: "New box",
           icon: "line-md:plus-square",
           action: this.addNewBox,
-        },
-        {
-          title: "Undo",
-          icon: "line-md:arrow-left-square",
-          action: this.undo,
         },
         {
           title: "Object Fit",
@@ -75,11 +121,6 @@ export default {
           title: "Gap",
           icon: "line-md:square",
           action: this.toggleGap,
-        },
-        {
-          title: "Reset",
-          icon: "line-md:close-circle",
-          action: this.reset,
         },
       ];
     },
@@ -111,6 +152,7 @@ export default {
           });
 
           this.photos = newPhotos;
+          this.updateUndoButtonDisabled();
           localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
           localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
         };
@@ -124,9 +166,10 @@ export default {
         type: "box",
         index: this.photos.length - 1,
       });
+      this.updateUndoButtonDisabled();
+      this.updateResetButtonDisabled();
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
       localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
-      console.log("Box baru ditambahkan.");
     },
 
     undo() {
@@ -137,9 +180,19 @@ export default {
         } else if (lastChange.type === "box") {
           this.photos.splice(lastChange.index, 1);
         }
+        this.updateUndoButtonDisabled();
+        this.updateResetButtonDisabled();
         localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
         localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
       }
+    },
+
+    updateUndoButtonDisabled() {
+      this.undoButtonDisabled = this.changeHistory.length === 0;
+    },
+
+    updateResetButtonDisabled() {
+      this.resetButtonDisabled = this.photos.every((photo) => photo === null);
     },
 
     toggleGap() {
@@ -164,13 +217,16 @@ export default {
     },
 
     reset() {
-      this.showConfirmModal = true;
+      if (!this.isResetDisabled) {
+        this.showConfirmModal = true;
+      }
     },
 
     handleReset() {
       this.showConfirmModal = false;
       this.photos = new Array(9).fill(null);
       this.changeHistory = [];
+      this.updateResetButtonDisabled();
       localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
       localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
     },
