@@ -1,5 +1,5 @@
 <template>
-  <button aria-label="Color Mode" @click="setColorTheme($colorMode.preference == 'dark' ? 'light' : 'dark')" title="Theme">
+  <button aria-label="Color Mode" @click="setColorTheme($colorMode.preference == 'dark' ? 'light' : 'dark')" title="Theme" class="hover:opacity-80">
     <Icon v-if="$colorMode.value == 'dark'" name="line-md:circle-twotone" :class="icon" />
     <Icon v-else name="line-md:circle" :class="icon" />
   </button>
