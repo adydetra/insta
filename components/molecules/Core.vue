@@ -23,7 +23,7 @@
       >
         <Icon id="icon" :name="resetButtonIcon" :title="resetButtonTitle" />
       </button>
-      <Color />
+      <AtomsColor />
     </div>
   </nav>
 
@@ -40,7 +40,7 @@
     </div>
   </section>
 
-  <Modal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
+  <AtomsModal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
 </template>
 
 <style>
