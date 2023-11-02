@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout id="top">
     <NuxtPage />
   </NuxtLayout>
 </template>
@@ -18,5 +18,11 @@ body * {
 useSeoMeta({
   title: "insta",
   description: "Web application specifically designed to give you an overview before upload your photos to Instagram",
+});
+
+useHead({
+  htmlAttrs: {
+    class: "scroll-smooth",
+  },
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <footer class="font-mono text-xs md:text-sm lg:text-xs 2xl:text-sm text-gray-400 space-y-2 px-3">
+  <footer class="font-mono text-xs md:text-sm lg:text-xs 2xl:text-sm text-gray-400 space-y-2 px-3" id="bottom">
     <p>
       by <NuxtLink to="https://github.com/adydetra" target="_blank" title="adydetra" :class="link">@adydetra</NuxtLink>, appreciate my work on
       <NuxtLink to="https://github.com/sponsors/adydetra" target="_blank" title="Github Sponsors" :class="link">Sponsors</NuxtLink>
