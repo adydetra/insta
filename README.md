@@ -16,11 +16,11 @@ Free photo post planner.
 
 ## Preview
 
-### Insta
+`Insta`
 
 ![Photo](public/testimonial-insta.png)
 
-### Instagram
+`Instagram`
 
 ![Photo](public/testimonial-instagram.PNG)
 
