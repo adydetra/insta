@@ -124,7 +124,7 @@ export default {
         },
         {
           title: "Object Fit",
-          icon: "line-md:image",
+          icon: "line-md:arrow-align-center",
           action: this.toggleObjectFit,
         },
         {
