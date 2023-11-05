@@ -9,13 +9,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/google-fonts",
-    "@nuxtjs/color-mode",
-    "@nuxt/image",
-    "nuxt-icon",
-  ],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "@nuxtjs/color-mode", "@nuxt/image", "nuxt-icon", "@vueuse/nuxt", "@vite-pwa/nuxt"],
 
   devtools: { enabled: false },
 
