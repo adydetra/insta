@@ -12,7 +12,7 @@ Free photo post planner.
 
 - [x] Batch importing
 - [x] Dark mode
-- [ ] PWA
+- [x] PWA
 
 ## Preview
 
