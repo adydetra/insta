@@ -59,191 +59,166 @@
 }
 </style>
 
-<script>
-export default {
-  data() {
-    return {
-      photos: [],
-      changeHistory: [],
-      currentGap: 1,
-      currentObjectFit: "object-cover",
-      gridGap: "gap-1",
-      defaultPhoto: "/example.png",
-      maxPhotos: 9,
-      showConfirmModal: false,
-    };
+<script setup>
+const photos = ref([]);
+const changeHistory = ref([]);
+const currentGap = ref(1);
+const currentObjectFit = ref("object-cover");
+const gridGap = ref("gap-1");
+const defaultPhoto = "/example.png";
+const maxPhotos = 9;
+const showConfirmModal = ref(false);
+let undoButtonDisabled = ref(false);
+let resetButtonDisabled = ref(false);
+
+const hasContent = computed(() => photos.value.some((photo) => photo !== null));
+const resetButtonIcon = computed(() => (hasContent.value ? "line-md:close-circle" : "line-md:close-circle"));
+const resetButtonTitle = computed(() => (hasContent.value ? "Reset" : "Reset is disabled"));
+const isResetDisabled = computed(() => changeHistory.value.length === 0);
+const undoButtonIcon = computed(() => (changeHistory.value.length > 0 ? "line-md:arrow-left-square" : "line-md:arrow-left-square"));
+const undoButtonTitle = computed(() => (changeHistory.value.length > 0 ? "Undo" : "Undo is disabled"));
+const isUndoDisabled = computed(() => changeHistory.value.length === 0);
+
+const buttons = computed(() => [
+  {
+    title: "New box",
+    icon: "line-md:plus-square",
+    action: addNewBox,
   },
-  mounted() {
-    const savedPhotos = JSON.parse(localStorage.getItem("savedPhotos")) || [];
-    const savedChangeHistory = JSON.parse(localStorage.getItem("changeHistory")) || [];
-
-    if (savedPhotos.length < this.maxPhotos) {
-      this.photos = savedPhotos.concat(new Array(this.maxPhotos - savedPhotos.length).fill(null));
-    } else {
-      this.photos = savedPhotos;
-    }
-    this.changeHistory = savedChangeHistory;
-    this.updateUndoButtonDisabled();
-    this.updateResetButtonDisabled();
+  {
+    title: "Object Fit",
+    icon: "line-md:arrow-align-center",
+    action: toggleObjectFit,
   },
-  computed: {
-    hasContent() {
-      return this.photos.some((photo) => photo !== null);
-    },
-
-    resetButtonIcon() {
-      return this.hasContent ? "line-md:close-circle" : "line-md:close-circle";
-    },
-
-    resetButtonTitle() {
-      return this.hasContent ? "Reset" : "Reset is disabled";
-    },
-
-    isResetDisabled() {
-      return this.changeHistory.length === 0;
-    },
-
-    undoButtonIcon() {
-      return this.changeHistory.length > 0 ? "line-md:arrow-left-square" : "line-md:arrow-left-square";
-    },
-
-    undoButtonTitle() {
-      return this.changeHistory.length > 0 ? "Undo" : "Undo is disabled";
-    },
-
-    isUndoDisabled() {
-      return this.changeHistory.length === 0;
-    },
-
-    buttons() {
-      return [
-        {
-          title: "New box",
-          icon: "line-md:plus-square",
-          action: this.addNewBox,
-        },
-        {
-          title: "Object Fit",
-          icon: "line-md:arrow-align-center",
-          action: this.toggleObjectFit,
-        },
-        {
-          title: "Gap",
-          icon: "line-md:square",
-          action: this.toggleGap,
-        },
-      ];
-    },
+  {
+    title: "Gap",
+    icon: "line-md:square",
+    action: toggleGap,
   },
-  methods: {
-    openFilePicker(index) {
-      this.$refs["inputRef" + index].click();
-    },
+]);
 
-    setPhoto(index, event) {
-      const file = event.target.files[0];
-      if (file) {
-        const allowedExtensions = ["png", "jpeg", "jpg"];
-        const fileExtension = file.name.split(".").pop().toLowerCase();
-        if (!allowedExtensions.includes(fileExtension)) {
-          alert("Only PNG, JPG, and JPEG files are allowed.");
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = () => {
-          const newPhotos = [...this.photos];
-          newPhotos[index] = reader.result;
-
-          this.changeHistory.push({
-            type: "image",
-            index: index,
-            data: reader.result,
-          });
-
-          this.photos = newPhotos;
-          this.updateUndoButtonDisabled();
-          localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-          localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-
-    addNewBox() {
-      this.photos.push(null);
-      this.changeHistory.push({
-        type: "box",
-        index: this.photos.length - 1,
-      });
-      this.updateUndoButtonDisabled();
-      this.updateResetButtonDisabled();
-      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-      localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
-    },
-
-    undo() {
-      if (this.changeHistory.length > 0) {
-        const lastChange = this.changeHistory.pop();
-        if (lastChange.type === "image") {
-          this.photos[lastChange.index] = null;
-        } else if (lastChange.type === "box") {
-          this.photos.splice(lastChange.index, 1);
-        }
-        this.updateUndoButtonDisabled();
-        this.updateResetButtonDisabled();
-        localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-        localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
-      }
-    },
-
-    updateUndoButtonDisabled() {
-      this.undoButtonDisabled = this.changeHistory.length === 0;
-    },
-
-    updateResetButtonDisabled() {
-      this.resetButtonDisabled = this.photos.every((photo) => photo === null);
-    },
-
-    toggleGap() {
-      if (this.gridGap === "gap-1") {
-        this.gridGap = "gap-2";
-        this.currentGap = 2;
-      } else if (this.gridGap === "gap-2") {
-        this.gridGap = "gap-3";
-        this.currentGap = 3;
-      } else {
-        this.gridGap = "gap-1";
-        this.currentGap = 1;
-      }
-    },
-
-    toggleObjectFit() {
-      if (this.currentObjectFit === "object-cover") {
-        this.currentObjectFit = "object-contain";
-      } else {
-        this.currentObjectFit = "object-cover";
-      }
-    },
-
-    reset() {
-      if (!this.isResetDisabled) {
-        this.showConfirmModal = true;
-      }
-    },
-
-    handleReset() {
-      this.showConfirmModal = false;
-      this.photos = new Array(9).fill(null);
-      this.changeHistory = [];
-      this.updateResetButtonDisabled();
-      localStorage.setItem("savedPhotos", JSON.stringify(this.photos));
-      localStorage.setItem("changeHistory", JSON.stringify(this.changeHistory));
-    },
-
-    cancelReset() {
-      this.showConfirmModal = false;
-    },
-  },
+const openFilePicker = (index) => {
+  const inputRef = `inputRef${index}`;
+  const inputElement = $refs[inputRef];
+  inputElement.click();
 };
+
+const setPhoto = (index, event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const allowedExtensions = ["png", "jpeg", "jpg"];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert("Only PNG, JPG, and JPEG files are allowed.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const newPhotos = [...photos.value];
+      newPhotos[index] = reader.result;
+
+      changeHistory.value.push({
+        type: "image",
+        index: index,
+        data: reader.result,
+      });
+
+      photos.value = newPhotos;
+      updateUndoButtonDisabled();
+      localStorage.setItem("savedPhotos", JSON.stringify(photos.value));
+      localStorage.setItem("changeHistory", JSON.stringify(changeHistory.value));
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+const addNewBox = () => {
+  photos.value.push(null);
+  changeHistory.value.push({
+    type: "box",
+    index: photos.value.length - 1,
+  });
+  updateUndoButtonDisabled();
+  updateResetButtonDisabled();
+  localStorage.setItem("savedPhotos", JSON.stringify(photos.value));
+  localStorage.setItem("changeHistory", JSON.stringify(changeHistory.value));
+};
+
+const undo = () => {
+  if (changeHistory.value.length > 0) {
+    const lastChange = changeHistory.value.pop();
+    if (lastChange.type === "image") {
+      photos.value[lastChange.index] = null;
+    } else if (lastChange.type === "box") {
+      photos.value.splice(lastChange.index, 1);
+    }
+    updateUndoButtonDisabled();
+    updateResetButtonDisabled();
+    localStorage.setItem("savedPhotos", JSON.stringify(photos.value));
+    localStorage.setItem("changeHistory", JSON.stringify(changeHistory.value));
+  }
+};
+
+const updateUndoButtonDisabled = () => {
+  undoButtonDisabled = changeHistory.value.length === 0;
+};
+
+const updateResetButtonDisabled = () => {
+  resetButtonDisabled = photos.value.every((photo) => photo === null);
+};
+
+const toggleGap = () => {
+  if (gridGap.value === "gap-1") {
+    gridGap.value = "gap-2";
+    currentGap.value = 2;
+  } else if (gridGap.value === "gap-2") {
+    gridGap.value = "gap-3";
+    currentGap.value = 3;
+  } else {
+    gridGap.value = "gap-1";
+    currentGap.value = 1;
+  }
+};
+
+const toggleObjectFit = () => {
+  if (currentObjectFit.value === "object-cover") {
+    currentObjectFit.value = "object-contain";
+  } else {
+    currentObjectFit.value = "object-cover";
+  }
+};
+
+const reset = () => {
+  if (!isResetDisabled.value) {
+    showConfirmModal.value = true;
+  }
+};
+
+const handleReset = () => {
+  showConfirmModal.value = false;
+  photos.value = new Array(9).fill(null);
+  changeHistory.value = [];
+  updateResetButtonDisabled();
+  localStorage.setItem("savedPhotos", JSON.stringify(photos.value));
+  localStorage.setItem("changeHistory", JSON.stringify(changeHistory.value));
+};
+
+const cancelReset = () => {
+  showConfirmModal.value = false;
+};
+
+onMounted(() => {
+  const savedPhotos = JSON.parse(localStorage.getItem("savedPhotos")) || [];
+  const savedChangeHistory = JSON.parse(localStorage.getItem("changeHistory")) || [];
+
+  if (savedPhotos.length < maxPhotos) {
+    photos.value = savedPhotos.concat(new Array(maxPhotos - savedPhotos.length).fill(null));
+  } else {
+    photos.value = savedPhotos;
+  }
+  changeHistory.value = savedChangeHistory;
+  updateUndoButtonDisabled();
+  updateResetButtonDisabled();
+});
 </script>

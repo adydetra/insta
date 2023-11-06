@@ -13,8 +13,8 @@
     "@nuxtjs/google-fonts": "^3.0.2",
     "@nuxtjs/tailwindcss": "^6.9.4",
     "@vite-pwa/nuxt": "^0.1.1",
-    "nuxt": "^3.8.0",
-    "nuxt-icon": "^0.6.1"
+    "nuxt": "^3.8.1",
+    "nuxt-icon": "^0.6.3"
   },
   "dependencies": {
     "@nuxt/image": "1.0.0",
