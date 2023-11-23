@@ -1,64 +1,3 @@
-<template>
-  <nav class="w-full flex items-center justify-between px-4">
-    <h1 class="text-4xl font-semibold">insta</h1>
-    <div class="flex gap-6 md:gap-8 lg:gap-6 2xl:gap-8 text-gray-400">
-      <button
-        @click="undo"
-        aria-label="button"
-        :title="undoButtonTitle"
-        :disabled="isUndoDisabled"
-        :class="isUndoDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
-      >
-        <Icon id="icon" :name="undoButtonIcon" :title="undoButtonTitle" />
-      </button>
-      <button v-for="button in buttons" @click="button.action" aria-label="button" :title="button.title" class="hover:opacity-80">
-        <Icon id="icon" :name="button.icon" :title="button.title" />
-      </button>
-      <button
-        @click="reset"
-        aria-label="button"
-        :title="resetButtonTitle"
-        :disabled="isResetDisabled"
-        :class="isResetDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
-      >
-        <Icon id="icon" :name="resetButtonIcon" :title="resetButtonTitle" />
-      </button>
-      <AtomsColor />
-    </div>
-  </nav>
-
-  <section class="grid grid-cols-3 py-12" :class="[gridGap]">
-    <div
-      v-for="(photo, index) in photos"
-      :key="index"
-      class="relative overflow-hidden flex items-center justify-center cursor-pointer aspect-square bg-black"
-      @click="openFilePicker(index)"
-    >
-      <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="setPhoto(index, $event)" :ref="'inputRef' + index" aria-label="input" />
-      <NuxtImg v-if="photo !== null" :src="photo" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
-      <NuxtImg v-else :src="defaultPhoto" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
-    </div>
-  </section>
-
-  <AtomsModal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
-  <transition
-    enter-active-class="duration-300 ease-out"
-    enter-from-class="transform opacity-0"
-    enter-to-class="opacity-100"
-    leave-active-class="duration-200 ease-in"
-    leave-from-class="opacity-100"
-    leave-to-class="transform opacity-0"
-  >
-    <AtomsToTopBottom v-if="photos.length > 15" class="transition" />
-  </transition>
-</template>
-
-<style>
-#icon {
-  @apply w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2;
-}
-</style>
-
 <script setup>
 const photos = ref([]);
 const changeHistory = ref([]);
@@ -222,3 +161,64 @@ onMounted(() => {
   updateResetButtonDisabled();
 });
 </script>
+
+<template>
+  <nav class="w-full flex items-center justify-between px-4">
+    <h1 class="text-4xl font-semibold">insta</h1>
+    <div class="flex gap-6 md:gap-8 lg:gap-6 2xl:gap-8 text-gray-400">
+      <button
+        @click="undo"
+        aria-label="button"
+        :title="undoButtonTitle"
+        :disabled="isUndoDisabled"
+        :class="isUndoDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
+      >
+        <Icon id="icon" :name="undoButtonIcon" :title="undoButtonTitle" />
+      </button>
+      <button v-for="button in buttons" @click="button.action" aria-label="button" :title="button.title" class="hover:opacity-80">
+        <Icon id="icon" :name="button.icon" :title="button.title" />
+      </button>
+      <button
+        @click="reset"
+        aria-label="button"
+        :title="resetButtonTitle"
+        :disabled="isResetDisabled"
+        :class="isResetDisabled ? 'cursor-not-allowed text-red-400 transiton ease-in-out' : 'hover:opacity-80'"
+      >
+        <Icon id="icon" :name="resetButtonIcon" :title="resetButtonTitle" />
+      </button>
+      <AtomsColor />
+    </div>
+  </nav>
+
+  <section class="grid grid-cols-3 py-12" :class="[gridGap]">
+    <div
+      v-for="(photo, index) in photos"
+      :key="index"
+      class="relative overflow-hidden flex items-center justify-center cursor-pointer aspect-square bg-black"
+      @click="openFilePicker(index)"
+    >
+      <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" @change="setPhoto(index, $event)" :ref="'inputRef' + index" aria-label="input" />
+      <NuxtImg v-if="photo !== null" :src="photo" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
+      <NuxtImg v-else :src="defaultPhoto" alt="" loading="lazy" placeholder :class="currentObjectFit + ' w-full h-full'" />
+    </div>
+  </section>
+
+  <AtomsModal :show="showConfirmModal" @confirm="handleReset" @cancel="cancelReset" />
+  <transition
+    enter-active-class="duration-300 ease-out"
+    enter-from-class="transform opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="duration-200 ease-in"
+    leave-from-class="opacity-100"
+    leave-to-class="transform opacity-0"
+  >
+    <AtomsToTopBottom v-if="photos.length > 15" class="transition" />
+  </transition>
+</template>
+
+<style>
+#icon {
+  @apply w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2;
+}
+</style>

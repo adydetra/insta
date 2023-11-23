@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const link = "border-b dark:border-gray-800 pb-0.5";
+</script>
+
 <template>
   <footer class="font-mono text-xs md:text-sm lg:text-xs 2xl:text-sm text-gray-400 space-y-2 px-3" id="bottom">
     <p>
@@ -10,7 +14,3 @@
     </p>
   </footer>
 </template>
-
-<script lang="ts" setup>
-const link = "border-b dark:border-gray-800 pb-0.5";
-</script>
