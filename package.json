@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "insta",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.3",
-    "@nuxtjs/google-fonts": "^3.0.2",
-    "@nuxtjs/tailwindcss": "^6.10.0",
-    "@vite-pwa/nuxt": "^0.2.3",
+    "@nuxtjs/google-fonts": "^3.1.0",
+    "@nuxtjs/tailwindcss": "^6.10.1",
+    "@vite-pwa/nuxt": "^0.3.1",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.6"
   },
