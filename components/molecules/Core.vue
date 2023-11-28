@@ -213,7 +213,7 @@ onMounted(() => {
     leave-from-class="opacity-100"
     leave-to-class="transform opacity-0"
   >
-    <AtomsToTopBottom v-if="photos.length > 15" class="transition" />
+    <AtomsScroll v-if="photos.length > 15" class="transition" />
   </transition>
 </template>
 
