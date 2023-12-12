@@ -1,21 +1,21 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      charset: "utf-8",
-      viewport: "width=device-width, initial-scale=1",
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
-        lang: "en",
+        lang: 'en',
       },
     },
   },
 
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "@nuxtjs/color-mode", "@nuxt/image", "nuxt-icon", "@vueuse/nuxt", "@vite-pwa/nuxt"],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxtjs/color-mode', '@nuxt/image', 'nuxt-icon', '@vueuse/nuxt', '@vite-pwa/nuxt'],
 
   devtools: { enabled: false },
 
   image: {
     quality: 1,
-    format: ["webp"],
+    format: ['webp'],
   },
 
   tailwindcss: {
@@ -24,46 +24,46 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      "Dancing Script": [400, 600],
+      'Dancing Script': [400, 600],
     },
-    display: "swap",
+    display: 'swap',
     prefetch: true,
     preconnect: true,
   },
 
   colorMode: {
-    classSuffix: "",
-    preference: "light",
+    classSuffix: '',
+    preference: 'light',
   },
 
   pwa: {
-    registerType: "autoUpdate",
+    registerType: 'autoUpdate',
     manifest: {
-      name: "insta",
-      short_name: "insta",
-      theme_color: "#FFF",
-      background_color: "#FFF",
+      name: 'insta',
+      short_name: 'insta',
+      theme_color: '#FFF',
+      background_color: '#FFF',
       icons: [
         {
-          src: "pwa-64x64.png",
-          sizes: "64x64",
-          type: "image/png",
+          src: 'pwa-64x64.png',
+          sizes: '64x64',
+          type: 'image/png',
         },
         {
-          src: "pwa-192x192.png",
-          sizes: "192x192",
-          type: "image/png",
+          src: 'pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
         },
         {
-          src: "pwa-512x512.png",
-          sizes: "512x512",
-          type: "image/png",
+          src: 'pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
         },
       ],
     },
     devOptions: {
       enabled: true,
-      type: "module",
+      type: 'module',
     },
   },
 });

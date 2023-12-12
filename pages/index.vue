@@ -1,3 +1,3 @@
 <template>
-  <MoleculesCore/>
+  <MoleculesCore />
 </template>

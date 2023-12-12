@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 useSeoMeta({
-  title: "insta",
-  description: "Web application specifically designed to give you an overview before upload your photos to Instagram",
+  title: 'insta',
+  description: 'Web application specifically designed to give you an overview before upload your photos to Instagram',
 });
 
 useHead({
   htmlAttrs: {
-    class: "scroll-smooth",
+    class: 'scroll-smooth',
   },
 });
 </script>
