@@ -1,24 +1,29 @@
 {
   "name": "insta",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@nuxt/devtools": "^1.0.4",
-    "@nuxtjs/google-fonts": "^3.1.0",
-    "@nuxtjs/tailwindcss": "^6.10.1",
-    "@vite-pwa/nuxt": "^0.3.3",
-    "nuxt": "^3.8.2",
-    "nuxt-icon": "^0.6.6"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@nuxt/image": "1.1.0",
     "@nuxtjs/color-mode": "^3.3.2",
-    "@vueuse/nuxt": "^10.6.1"
+    "@vueuse/nuxt": "^10.7.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.4.5",
+    "@nuxt/devtools": "^1.0.5",
+    "@nuxtjs/google-fonts": "^3.1.1",
+    "@nuxtjs/tailwindcss": "^6.10.1",
+    "@vite-pwa/nuxt": "^0.3.5",
+    "eslint": "^8.55.0",
+    "nuxt": "^3.8.2",
+    "nuxt-icon": "^0.6.7"
   }
 }
