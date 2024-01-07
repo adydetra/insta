@@ -1,15 +1,10 @@
-<script lang="ts" setup>
-const icons = [
-  { name: 'high', to: 'top' },
-  { name: 'low', to: 'bottom' },
-];
-const style = 'bg-gray-black border border-gray-700/70 rounded-full p-[0.001rem] hover:opacity-50';
-</script>
-
 <template>
-  <div class="fixed hidden md:flex flex-col gap-4 -mt-12 inset-y-1/2 start-[84%] lg:start-2/3">
-    <NuxtLink v-for="(icon, index) in icons" :key="index" :to="`#${icon.to}`" :class="style">
-      <Icon :name="`meteocons:pressure-${icon.name}-fill`" size="32" />
+  <div class="fixed start-[84%] inset-y-1/2 flex-col gap-4 lg:start-2/3 -mt-12 md:flex">
+    <NuxtLink to="#top" border-1 border-gray-700 rounded-full border-solid p-[0.001rem] hover:opacity-50>
+      <div i-meteocons:pressure-high-fill text-3xl leading-0 />
+    </NuxtLink>
+    <NuxtLink to="#bottom" border-1 border-gray-700 rounded-full border-solid p-[0.001rem] hover:opacity-50>
+      <div i-meteocons:pressure-low-fill text-3xl leading-0 />
     </NuxtLink>
   </div>
 </template>

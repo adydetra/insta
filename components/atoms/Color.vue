@@ -1,21 +1,13 @@
 <script setup lang="ts">
-type Theme = 'light' | 'dark';
+const colorMode = useColorMode();
 
-const icon = 'w-4 h-4 md:w-5 md:h-5 lg:w-4 lg:h-4 2xl:w-5 2xl:h-5 mt-2';
-
-function setColorTheme(newTheme: Theme) {
-  useColorMode().preference = newTheme;
+function toggleMode() {
+  colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light';
 }
 </script>
 
 <template>
-  <button
-    aria-label="Color Mode"
-    :title="$colorMode.preference === 'dark' ? 'Switch to light' : 'Switch to dark'"
-    class="hover:opacity-80"
-    @click="setColorTheme($colorMode.preference === 'dark' ? 'light' : 'dark')"
-  >
-    <Icon v-if="$colorMode.value === 'dark'" name="line-md:sunny-outline-to-moon-alt-loop-transition" :class="icon" />
-    <Icon v-else name="line-md:sunny-outline-loop" :class="icon" />
+  <button button aria-label="Color Mode" :title="$colorMode.preference === 'dark' ? 'Switch to light' : 'Switch to dark'" @click="toggleMode">
+    <div i-line-md:sunny-outline-loop dark:i-line-md:sunny-outline-to-moon-alt-loop-transition text-gray-400 dark:icon icon dark:text-gray-400 />
   </button>
 </template>

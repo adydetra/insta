@@ -1,21 +1,17 @@
-<script lang="ts" setup>
-const link = 'border-b dark:border-gray-800 pb-0.5';
-</script>
-
+<!-- eslint-disable vue/multiline-html-element-content-newline -->
 <template>
-  <footer id="bottom" class="font-mono text-xs md:text-sm lg:text-xs 2xl:text-sm text-gray-400 space-y-2 px-3">
+  <footer id="bottom" mt-12 px-3 text-xs text-gray-400 font-mono space-y-2 md:text-sm>
     <p>
-      by <NuxtLink to="https://github.com/adydetra" target="_blank" title="adydetra" :class="link">
-        @adydetra
-      </NuxtLink>, appreciate my work on
-      <NuxtLink to="https://github.com/sponsors/adydetra" target="_blank" title="Github Sponsors" :class="link">
+      by <NuxtLink to="https://github.com/adydetra" target="_blank" title="adydetra" link>
+        @adydetra</NuxtLink>, appreciate my work on
+      <NuxtLink to="https://github.com/sponsors/adydetra" target="_blank" title="Github Sponsors" link>
         Sponsors
       </NuxtLink>
     </p>
     <p>
       powered by nuxt 💚. source on
-      <NuxtLink to="https://github.com/adydetra/insta" target="_blank" title="Github" :class="link">
-        <Icon name="line-md:github-loop" title="Github" />
+      <NuxtLink to="https://github.com/adydetra/insta" target="_blank" title="Github" link>
+        GitHub
       </NuxtLink>
     </p>
   </footer>

@@ -14,13 +14,13 @@ function cancel() {
 </script>
 
 <template>
-  <div v-if="show" :class="cover" class="bg-gray-800 opacity-95" />
-  <div v-if="show" :class="cover">
+  <div v-if="show" :class="cover" bg-gray-800 opacity-95 />
+  <div v-if="show" :class="cover" text-4xl>
     <div title="Confirm">
-      <Icon size="40" name="healthicons:yes" :class="icon" class="text-blue-500" @click="confirm" />
+      <div class="i-healthicons:yes" :class="icon" text-blue-500 @click="confirm" />
     </div>
     <div title="Cancel">
-      <Icon size="40" name="healthicons:no" :class="icon" class="text-red-500" @click="cancel" />
+      <div class="i-healthicons:no" :class="icon" text-red-500 @click="cancel" />
     </div>
   </div>
 </template>
