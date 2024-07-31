@@ -167,7 +167,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav flex items-center justify-between px-4>
+  <nav flex items-center justify-between px-4 pt-6>
     <h1 text-4xl font-semibold leading-0 font-sans>
       insta
     </h1>
