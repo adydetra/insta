@@ -45,10 +45,14 @@ export default defineNuxtConfig({
     quality: 1,
     format: ['webp'],
   },
+
   colorMode: {
     classSuffix: '',
   },
+
   devtools: {
     enabled: false,
   },
+
+  compatibilityDate: '2024-07-31',
 });
