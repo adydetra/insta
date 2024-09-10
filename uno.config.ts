@@ -1,5 +1,5 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno, presetWebFonts } from 'unocss';
 import transformerDirectives from '@unocss/transformer-directives';
+import { defineConfig, presetAttributify, presetIcons, presetUno, presetWebFonts } from 'unocss';
 
 export default defineConfig({
   presets: [
