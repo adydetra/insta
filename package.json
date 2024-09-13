@@ -12,16 +12,15 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@nuxt/image": "1.8.0",
-    "sortablejs": "^1.15.3"
+    "@nuxt/image": "1.8.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.5.0",
+    "@antfu/eslint-config": "^3.6.0",
     "@iconify-json/healthicons": "^1.2.0",
     "@iconify-json/line-md": "^1.2.1",
     "@iconify-json/meteocons": "^1.2.0",
-    "@nuxt/devtools": "^1.4.1",
-    "@nuxtjs/color-mode": "^3.4.4",
+    "@nuxt/devtools": "^1.4.2",
+    "@nuxtjs/color-mode": "^3.5.0",
     "@unocss/eslint-plugin": "^0.62.3",
     "@unocss/nuxt": "^0.62.3",
     "@vite-pwa/nuxt": "^0.10.5",
@@ -31,6 +30,6 @@
     "eslint-plugin-format": "^0.1.2",
     "nuxt": "^3.13.1",
     "vue": "^3.5.4",
-    "vue-router": "^4.4.3"
+    "vue-router": "^4.4.5"
   }
 }
