@@ -12,24 +12,24 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@nuxt/image": "1.8.0"
+    "@nuxt/image": "1.8.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.6.0",
-    "@iconify-json/healthicons": "^1.2.0",
-    "@iconify-json/line-md": "^1.2.1",
-    "@iconify-json/meteocons": "^1.2.0",
-    "@nuxt/devtools": "^1.4.2",
-    "@nuxtjs/color-mode": "^3.5.0",
-    "@unocss/eslint-plugin": "^0.62.3",
-    "@unocss/nuxt": "^0.62.3",
-    "@vite-pwa/nuxt": "^0.10.5",
-    "@vueuse/core": "^11.0.3",
-    "@vueuse/nuxt": "^11.0.3",
-    "eslint": "^9.10.0",
+    "@antfu/eslint-config": "^3.9.2",
+    "@iconify-json/healthicons": "^1.2.1",
+    "@iconify-json/line-md": "^1.2.2",
+    "@iconify-json/meteocons": "^1.2.1",
+    "@nuxt/devtools": "^1.6.1",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@unocss/eslint-plugin": "^0.64.1",
+    "@unocss/nuxt": "^0.64.1",
+    "@vite-pwa/nuxt": "^0.10.6",
+    "@vueuse/core": "^11.3.0",
+    "@vueuse/nuxt": "^11.3.0",
+    "eslint": "^9.15.0",
     "eslint-plugin-format": "^0.1.2",
-    "nuxt": "^3.13.1",
-    "vue": "^3.5.4",
+    "nuxt": "^3.14.1592",
+    "vue": "^3.5.13",
     "vue-router": "^4.4.5"
   }
 }
