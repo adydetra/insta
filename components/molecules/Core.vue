@@ -7,10 +7,8 @@ const gridGap = ref('gap-1');
 const defaultPhoto = '/example.png';
 const maxPhotos = 9;
 const showConfirmModal = ref(false);
-// eslint-disable-next-line unused-imports/no-unused-vars
-let undoButtonDisabled = ref(false);
-// eslint-disable-next-line unused-imports/no-unused-vars
-let resetButtonDisabled = ref(false);
+const undoButtonDisabled = ref(false);
+const resetButtonDisabled = ref(false);
 
 const hasContent = computed(() => photos.value.some(photo => photo !== null));
 const resetButtonIcon = computed(() => (hasContent.value ? 'i-line-md:close-circle' : 'i-line-md:close-circle'));
@@ -103,11 +101,11 @@ function undo() {
 }
 
 function updateUndoButtonDisabled() {
-  undoButtonDisabled = changeHistory.value.length === 0;
+  undoButtonDisabled.value = changeHistory.value.length === 0;
 }
 
 function updateResetButtonDisabled() {
-  resetButtonDisabled = photos.value.every(photo => photo === null);
+  resetButtonDisabled.value = photos.value.every(photo => photo === null);
 }
 
 function toggleGap() {
