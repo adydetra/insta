@@ -8,7 +8,7 @@ Will be very useful for those of you who always want to be precise with each gri
 
 Free photo post planner.
 
-**[Try the App now!](https://insta.adydetra.my.id/)**
+**[Try the App now!](https://insta-adydetra.vercel.app)**
 
 ## Checklist
 
