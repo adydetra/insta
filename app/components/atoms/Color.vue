@@ -8,6 +8,6 @@ function toggleMode() {
 
 <template>
   <button button aria-label="Color Mode" :title="$colorMode.preference === 'dark' ? 'Switch to light' : 'Switch to dark'" @click="toggleMode">
-    <div i-line-md:sunny-outline-loop dark:i-line-md:sunny-outline-to-moon-alt-loop-transition text-gray-400 dark:icon icon dark:text-gray-400 />
+    <div i-line-md:sunny-outline-loop dark:i-line-md:sunny-outline-to-moon-alt-loop-transition icon text-gray-400 dark:icon dark:text-gray-400 />
   </button>
 </template>

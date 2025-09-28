@@ -180,7 +180,7 @@ onMounted(() => {
         <div icon :class="undoButtonIcon" :title="undoButtonTitle" />
       </button>
       <button v-for="(button, index) in buttons" :key="index" aria-label="button" :title="button.title" button @click="button.action">
-        <div text-gray-400 icon :class="button.icon" :title="button.title" />
+        <div icon text-gray-400 :class="button.icon" :title="button.title" />
       </button>
       <button
         aria-label="button"
