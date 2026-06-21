@@ -19,17 +19,17 @@
     "@iconify-json/healthicons": "^1.2.12",
     "@iconify-json/line-md": "^1.2.16",
     "@iconify-json/meteocons": "^1.2.4",
-    "@nuxt/devtools": "^4.0.0-alpha.4",
-    "@nuxtjs/color-mode": "^4.0.0",
-    "@unocss/eslint-plugin": "^66.7.0",
-    "@unocss/nuxt": "^66.7.0",
+    "@nuxt/devtools": "^4.0.0-alpha.7",
+    "@nuxtjs/color-mode": "^4.0.1",
+    "@unocss/eslint-plugin": "^66.7.2",
+    "@unocss/nuxt": "^66.7.2",
     "@vite-pwa/nuxt": "^1.1.1",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
-    "eslint": "^10.4.0",
+    "eslint": "^10.5.0",
     "eslint-plugin-format": "^2.0.1",
-    "nuxt": "^4.4.6",
-    "vue": "^3.5.34",
-    "vue-router": "^5.0.7"
+    "nuxt": "^4.4.8",
+    "vue": "^3.5.38",
+    "vue-router": "^5.1.0"
   }
 }
